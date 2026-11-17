@@ -140,54 +140,120 @@ dt{color:var(--mut)}dd{margin:0;font-weight:500}
 <script>
 const $=s=>document.querySelector(s);
 // ——— ДАННЫЕ: формат «название|страна (KZ, RU или пусто)|смысловое поле» ———
-const RAW=`Alokosay||name
+const RAW=`Alokosay|RU|name
 ARMAN|KZ|name
 Аламан|KZ|geo
 Беседа|RU|trad
-Жамбо||exo
-Индира||name
+Жамбо|KZ|exo
+Индира|KZ|name
 Пиала|KZ|trad
 Рахмет|KZ|geo
 Русский|RU|geo
-Самовар||trad
+Самовар|RU|trad
 Той|KZ|trad
-Нилгири||exo
-Отборный||qual
-ЛактоМама||qual
-Купаж||qual
+Нилгири|RU|exo
+Отборный|RU|qual
+ЛактоМама|RU|qual
+Купаж|RU|qual
 Тамаша|KZ|geo
 Тенгри|KZ|geo
 Таза|KZ|qual
 Беташар|KZ|geo
 Майский|RU|qual
 Монастырский|RU|trad
-Ассам||exo
-Фараон||royal
-Шах||royal
+Ассам|KZ|exo
+Фараон|RU|royal
+Шах|KZ|royal
 Стравинский|RU|name
 Иван-чай|RU|trad
 Крым-чай|RU|geo
-Бенгальский тигр||exo
-Китайский дракон||exo
-Королевское сафари||royal
-Жемчужина Нила||exo
-Цветок лотоса||exo
-Царская корона||royal
+Бенгальский тигр|RU|exo
+Китайский дракон|RU|exo
+Королевское сафари|RU|royal
+Жемчужина Нила|KZ|exo
+Цветок лотоса|RU|exo
+Царская корона|RU|royal
 Русское чаепитие|RU|trad
-Индийский слон||exo
-Индийский стандарт||qual
-Золотые лепестки||qual
-Принцесса Нури||royal
-Принцесса Ява||royal
-Принцесса Канди||royal
-Принцесса Гита||royal
-Тянь Шань|KZ|geo
+Индийский слон|RU|exo
+Индийский стандарт|KZ|qual
+Золотые лепестки|RU|qual
+Принцесса Нури|RU|royal
+Принцесса Ява|RU|royal
+Принцесса Канди|RU|royal
+Принцесса Гита|RU|royal
+Тянь Шань|RU|geo
 Добрыня Никитич|RU|name
-Масаи Мара||exo
-Индийский традиционный||qual
-Жар-Жар||qual
-Чай №95||qual
-Байховый №1||qual`;
+Масаи Мара|KZ|exo
+Индийский традиционный|RU|qual
+Жар-Жар|KZ|qual
+Чай №95|RU|qual
+Байховый №1|KZ|qual
+AHMAD|RU|name
+Batik|RU|exo
+BAYCE|RU|name
+BESTSELLER|RU|qual
+Brooke Bond|RU|name
+CHAMPION|RU|royal
+Curtis|RU|name
+Dilmah|RU|name
+Flying Dragon|RU|exo
+Greenfield|RU|geo
+Hillway|RU|geo
+HYLEYS|RU|name
+KENIKA|RU|geo
+LEGEND|RU|royal
+Lipton|RU|name
+LONDON|RU|geo
+Maitre de The|RU|royal
+MILFORD|RU|geo
+RICHARD|RU|royal
+TESS|RU|name
+АЗЕРЧАЙ|RU|geo
+АКБАР|RU|royal
+Бриллиант|RU|royal
+Бухта Коломбо|RU|geo
+ДАРДЖИЛИНГ|RU|geo
+Жасминовая красавица|RU|exo
+Имбирный чай|RU|qual
+Корона Российской империи|RU|royal
+Краснодарский|RU|geo
+Лебёдушка|RU|trad
+Лисма|RU|name
+Любимые города России|RU|geo
+Малавар|RU|exo
+Саванна|RU|exo
+Фито-чай|RU|qual
+Фруктовая линия|RU|qual
+ЧАЙ|RU|qual
+Чайный двор|RU|trad
+Чёрный бриллиант|RU|royal
+Шахразада|RU|exo
+Assortea|KZ|qual
+Beta Tea|KZ|name
+Hemant|KZ|name
+PURITEA|KZ|qual
+Simba/Симба|KZ|exo
+АқМан|KZ|geo
+Алтын Кесе|KZ|trad
+Бодрость|KZ|qual
+Дастархан|KZ|trad
+Дәстур|KZ|trad
+Долина Нанди|KZ|geo
+Еламан|KZ|name
+Казахстанский|KZ|geo
+Кәусар|KZ|geo
+Қоржын|KZ|trad
+Наурыз|KZ|trad
+Похудей/Арықтатуға|KZ|qual
+Принцесса Востока|KZ|royal
+Сафари|KZ|exo
+Слон|KZ|exo
+Столичный|KZ|geo
+Табо|KZ|name
+Тарлан|KZ|geo
+ТЕМБО|KZ|exo
+Тұмар|KZ|trad
+Шырын|KZ|geo`;
 // Картинки пачек: IMG['Пиала']='pack/piala.jpg' (или data:URI). Свои заметки к разбору: NOTES['Пиала']='…'
 const IMG={
   'Alokosay':'pack/alokosay.jpg',
@@ -237,7 +303,73 @@ const IMG={
   'Индийский традиционный':'pack/indiyskiy-traditsionny.jpg',
   'Жар-Жар':'pack/zhar-zhar.jpg',
   'Чай №95':'pack/chai-95.jpg',
-  'Байховый №1':'pack/baykhovyy-1.jpg'
+  'Байховый №1':'pack/baykhovyy-1.jpg',
+  'AHMAD':'pack/ahmad.jpg',
+  'Batik':'pack/batik.jpg',
+  'BAYCE':'pack/bayce.jpg',
+  'BESTSELLER':'pack/bestseller.jpg',
+  'Brooke Bond':'pack/brooke-bond.jpg',
+  'CHAMPION':'pack/champion.jpg',
+  'Curtis':'pack/curtis.jpg',
+  'Dilmah':'pack/dilmah.jpg',
+  'Flying Dragon':'pack/flying-dragon.jpg',
+  'Greenfield':'pack/greenfield.jpg',
+  'Hillway':'pack/hillway.jpg',
+  'HYLEYS':'pack/hyleys.jpg',
+  'KENIKA':'pack/kenika.jpg',
+  'LEGEND':'pack/legend.jpg',
+  'Lipton':'pack/lipton.jpg',
+  'LONDON':'pack/london.jpg',
+  'Maitre de The':'pack/maitre-de-the.jpg',
+  'MILFORD':'pack/milford.jpg',
+  'RICHARD':'pack/richard.jpg',
+  'TESS':'pack/tess.jpg',
+  'АЗЕРЧАЙ':'pack/azerchay.jpg',
+  'АКБАР':'pack/akbar.jpg',
+  'Бриллиант':'pack/brilliant.jpg',
+  'Бухта Коломбо':'pack/buhta-kolombo.jpg',
+  'ДАРДЖИЛИНГ':'pack/darjeeling.jpg',
+  'Жасминовая красавица':'pack/zhasminovaya-krasavitsa.jpg',
+  'Имбирный чай':'pack/imbirnyy-chai.jpg',
+  'Корона Российской империи':'pack/korona-rossiyskoy-imperii.jpg',
+  'Краснодарский':'pack/krasnodarskiy.jpg',
+  'Лебёдушка':'pack/lebedushka.jpg',
+  'Лисма':'pack/lisma.jpg',
+  'Любимые города России':'pack/lyubimye-goroda-rossii.jpg',
+  'Малавар':'pack/malavar.jpg',
+  'Саванна':'pack/savanna.jpg',
+  'Фито-чай':'pack/fito-chai.jpg',
+  'Фруктовая линия':'pack/fruktovaya-liniya.jpg',
+  'ЧАЙ':'pack/chai.jpg',
+  'Чайный двор':'pack/chaynyy-dvor.jpg',
+  'Чёрный бриллиант':'pack/chernyy-brilliant.jpg',
+  'Шахразада':'pack/shahrazada.jpg',
+  'Assortea':'pack/assortea.jpg',
+  'Beta Tea':'pack/beta-tea.jpg',
+  'Hemant':'pack/hemant.jpg',
+  'PURITEA':'pack/puritea.jpg',
+  'Simba/Симба':'pack/simba.jpg',
+  'АқМан':'pack/akman.jpg',
+  'Алтын Кесе':'pack/altyn-kese.jpg',
+  'Бодрость':'pack/bodrost.jpg',
+  'Дастархан':'pack/dastarkhan.jpg',
+  'Дәстур':'pack/dastur.jpg',
+  'Долина Нанди':'pack/dolina-nandi.jpg',
+  'Еламан':'pack/elaman.jpg',
+  'Казахстанский':'pack/kazakhstanskiy.jpg',
+  'Кәусар':'pack/kausar.jpg',
+  'Қоржын':'pack/korzhyn.jpg',
+  'Наурыз':'pack/nauryz.jpg',
+  'Похудей/Арықтатуға':'pack/pohudey.jpg',
+  'Принцесса Востока':'pack/printsessa-vostoka.jpg',
+  'Сафари':'pack/safari.jpg',
+  'Слон':'pack/slon.jpg',
+  'Столичный':'pack/stolichnyy.jpg',
+  'Табо':'pack/tabo.jpg',
+  'Тарлан':'pack/tarlan.jpg',
+  'ТЕМБО':'pack/tembo.jpg',
+  'Тұмар':'pack/tumar.jpg',
+  'Шырын':'pack/shyryn.jpg'
 }, NOTES={};
 // Цифры исследования для панели спикера
 const STATS=[['114','марок в базе'],['77','однословных'],['25','словосочетаний'],['84%','кириллица на рынке РК'],['30%','латиница на рынке РФ']];
@@ -274,7 +406,7 @@ $('#grid').onclick=e=>{const b=e.target.closest('.card');if(!b)return;const it=i
 $('#mb').innerHTML=`<div class="big">${pack(it,true)}</div><div><h3>${it.n}</h3>
 <div class="tags">${it.c?`<span>${it.c==='KZ'?'Казахстан':'Россия'}</span>`:''}<span>${ST[it.s]}</span><span>${t[0]}</span></div>
 <h4>Лингвистический разбор</h4>
-<dl><dt>Структура</dt><dd>${ST[it.s]}</dd><dt>Слов</dt><dd>${it.n.trim().split(/\s+/).length}</dd><dt>Букв</dt><dd>${it.n.replace(/[^A-Za-zА-Яа-яЁё]/g,'').length}</dd><dt>Алфавит</dt><dd>${it.lat?'латиница':'кириллица'}</dd><dt>Смысловое поле</dt><dd>${t[0]}</dd></dl>
+<dl><dt>Структура</dt><dd>${ST[it.s]}</dd><dt>Слов</dt><dd>${it.n.trim().split(/\s+/).length}</dd><dt>Букв</dt><dd>${it.n.replace(/[^A-Za-zА-Яа-яЁёӘәІіҢңҒғҮүҰұҚқӨөҺһ]/g,'').length}</dd><dt>Алфавит</dt><dd>${it.lat&&/[А-Яа-яЁёӘәІіҢңҒғҮүҰұҚқӨөҺһ]/.test(it.n)?'латиница + кириллица':it.lat?'латиница':'кириллица'}</dd><dt>Смысловое поле</dt><dd>${t[0]}</dd></dl>
 <p>${t[2]}</p><h4>Психология покупателя</h4><p>${t[3]}</p>${NOTES[it.n]?`<h4>Комментарий</h4><p>${NOTES[it.n]}</p>`:''}</div>`;m.showModal()};
 $('#mx').onclick=()=>m.close();m.onclick=e=>{if(e.target===m)m.close()};
 
